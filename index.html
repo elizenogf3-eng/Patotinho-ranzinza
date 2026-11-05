@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patotinho Ranzinza</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #171717;
+    font-family: sans-serif;
+    color: white;
+  }
+
+  #duck {
+    position: absolute;
+    left: 40%;
+    top: 45%;
+    width: 125px;
+    height: 120px;
+    cursor: pointer;
+    touch-action: none;
+    animation: waddle .55s infinite alternate ease-in-out;
+  }
+
+  .body {
+    position: absolute;
+    width: 95px;
+    height: 75px;
+    background: #ffd83d;
+    border-radius: 55% 50% 45% 45%;
+    top: 25px;
+    left: 10px;
+    box-shadow: inset -8px -5px #e9b92d;
+  }
+
+  .head {
+    position: absolute;
+    width: 65px;
+    height: 62px;
+    background: #ffe15b;
+    border-radius: 50%;
+    top: 0;
+    left: 48px;
+  }
+
+  .eye {
+    position: absolute;
+    background: #24201a;
+    width: 7px;
+    height: 9px;
+    border-radius: 50%;
+    top: 25px;
+  }
+
+  .eye.left { left: 17px; }
+  .eye.right { left: 40px; }
+
+  .brow {
+    position: absolute;
+    width: 17px;
+    height: 5px;
+    background: #49351e;
+    top: 17px;
+    left: 12px;
+    transform: rotate(18deg);
+    border-radius: 5px;
+  }
+
+  .brow.right {
+    left: 37px;
+    transform: rotate(-18deg);
+  }
+
+  .beak {
+    position: absolute;
+    top: 36px;
+    left: 63px;
+    width: 25px;
+    height: 13px;
+    background: #ff8b24;
+    border-radius: 50% 50% 60% 60%;
+    z-index: 2;
+  }
+
+  .foot {
+    position: absolute;
+    width: 25px;
+    height: 7px;
+    background: #ed8528;
+    top: 96px;
+    border-radius: 50%;
+  }
+
+  .foot.one { left: 25px; }
+  .foot.two { left: 75px; }
+
+  #message {
+    position: absolute;
+    top: -35px;
+    left: 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  @keyframes waddle {
+    from { transform: translateY(0) rotate(-4deg); }
+    to { transform: translateY(5px) rotate(4deg); }
+  }
+
+  .angry {
+    animation: rage .15s infinite alternate !important;
+  }
+
+  @keyframes rage {
+    from { transform: rotate(-9deg); }
+    to { transform: rotate(9deg); }
+  }
+</style>
+</head>
+
+<body>
+<div id="duck">
+  <div id="message">Não enche. 😒</div>
+  <div class="body"></div>
+  <div class="head">
+    <div class="brow"></div>
+    <div class="brow right"></div>
+    <div class="eye left"></div>
+    <div class="eye right"></div>
+  </div>
+  <div class="beak"></div>
+  <div class="foot one"></div>
+  <div class="foot two"></div>
+</div>
+
+<script>
+const duck = document.getElementById("duck");
+const message = document.getElementById("message");
+
+const phrases = [
+  "Que foi?! 😠",
+  "Tira o dedo!",
+  "Estou ocupado!",
+  "QUACK! 😡",
+  "Me deixa!",
+  "Isso é assédio penoso!"
+];
+
+duck.addEventListener("click", () => {
+  message.textContent =
+    phrases[Math.floor(Math.random() * phrases.length)];
+
+  duck.classList.add("angry");
+
+  setTimeout(() => {
+    duck.classList.remove("angry");
+  }, 700);
+});
+</script>
+</body>
+      </html>
+      
