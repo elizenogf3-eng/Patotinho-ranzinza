@@ -7,123 +7,130 @@
 <title>Patotinho Ranzinza</title>
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: #171717;
-    font-family: sans-serif;
-    color: white;
-  }
+* { box-sizing: border-box; }
 
-  #duck {
-    position: absolute;
-    left: 40%;
-    top: 45%;
-    width: 125px;
-    height: 120px;
-    cursor: pointer;
-    touch-action: none;
-    animation: waddle .55s infinite alternate ease-in-out;
-  }
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #171717;
+  font-family: sans-serif;
+  color: white;
+  user-select: none;
+}
 
-  .body {
-    position: absolute;
-    width: 95px;
-    height: 75px;
-    background: #ffd83d;
-    border-radius: 55% 50% 45% 45%;
-    top: 25px;
-    left: 10px;
-    box-shadow: inset -8px -5px #e9b92d;
-  }
+#duck {
+  position: fixed;
+  left: 35%;
+  top: 45%;
+  width: 125px;
+  height: 120px;
+  touch-action: none;
+  cursor: grab;
+  --dir: 1;
+  animation: waddle .35s infinite alternate ease-in-out;
+}
 
-  .head {
-    position: absolute;
-    width: 65px;
-    height: 62px;
-    background: #ffe15b;
-    border-radius: 50%;
-    top: 0;
-    left: 48px;
-  }
+.body {
+  position: absolute;
+  width: 95px;
+  height: 75px;
+  background: #ffd83d;
+  border-radius: 55% 50% 45% 45%;
+  top: 25px;
+  left: 10px;
+  box-shadow: inset -8px -5px #e9b92d;
+}
 
-  .eye {
-    position: absolute;
-    background: #24201a;
-    width: 7px;
-    height: 9px;
-    border-radius: 50%;
-    top: 25px;
-  }
+.head {
+  position: absolute;
+  width: 65px;
+  height: 62px;
+  background: #ffe15b;
+  border-radius: 50%;
+  top: 0;
+  left: 48px;
+}
 
-  .eye.left { left: 17px; }
-  .eye.right { left: 40px; }
+.eye {
+  position: absolute;
+  background: #24201a;
+  width: 7px;
+  height: 9px;
+  border-radius: 50%;
+  top: 25px;
+}
 
-  .brow {
-    position: absolute;
-    width: 17px;
-    height: 5px;
-    background: #49351e;
-    top: 17px;
-    left: 12px;
-    transform: rotate(18deg);
-    border-radius: 5px;
-  }
+.eye.left { left: 17px; }
+.eye.right { left: 40px; }
 
-  .brow.right {
-    left: 37px;
-    transform: rotate(-18deg);
-  }
+.brow {
+  position: absolute;
+  width: 17px;
+  height: 5px;
+  background: #49351e;
+  top: 17px;
+  left: 12px;
+  transform: rotate(18deg);
+  border-radius: 5px;
+}
 
-  .beak {
-    position: absolute;
-    top: 36px;
-    left: 63px;
-    width: 25px;
-    height: 13px;
-    background: #ff8b24;
-    border-radius: 50% 50% 60% 60%;
-    z-index: 2;
-  }
+.brow.right {
+  left: 37px;
+  transform: rotate(-18deg);
+}
 
-  .foot {
-    position: absolute;
-    width: 25px;
-    height: 7px;
-    background: #ed8528;
-    top: 96px;
-    border-radius: 50%;
-  }
+.beak {
+  position: absolute;
+  top: 36px;
+  left: 63px;
+  width: 25px;
+  height: 13px;
+  background: #ff8b24;
+  border-radius: 50% 50% 60% 60%;
+  z-index: 2;
+}
 
-  .foot.one { left: 25px; }
-  .foot.two { left: 75px; }
+.foot {
+  position: absolute;
+  width: 25px;
+  height: 7px;
+  background: #ed8528;
+  top: 96px;
+  border-radius: 50%;
+}
 
-  #message {
-    position: absolute;
-    top: -35px;
-    left: 10px;
-    font-size: 13px;
-    white-space: nowrap;
-  }
+.foot.one { left: 25px; }
+.foot.two { left: 75px; }
 
-  @keyframes waddle {
-    from { transform: translateY(0) rotate(-4deg); }
-    to { transform: translateY(5px) rotate(4deg); }
-  }
+#message {
+  position: absolute;
+  top: -35px;
+  left: 0;
+  font-size: 13px;
+  white-space: nowrap;
+  font-weight: bold;
+}
 
-  .angry {
-    animation: rage .15s infinite alternate !important;
-  }
+@keyframes waddle {
+  from { transform: translateY(0) rotate(-4deg) scaleX(var(--dir)); }
+  to { transform: translateY(5px) rotate(4deg) scaleX(var(--dir)); }
+}
 
-  @keyframes rage {
-    from { transform: rotate(-9deg); }
-    to { transform: rotate(9deg); }
-  }
+.angry {
+  animation: rage .12s infinite alternate !important;
+}
+
+@keyframes rage {
+  from { transform: rotate(-12deg) scaleX(var(--dir)); }
+  to { transform: rotate(12deg) scaleX(var(--dir)); }
+}
+
 </style>
 </head>
 
 <body>
+
 <div id="duck">
   <div id="message">Não enche. 😒</div>
   <div class="body"></div>
@@ -143,15 +150,25 @@ const duck = document.getElementById("duck");
 const message = document.getElementById("message");
 
 const phrases = [
-  "Que foi?! 😠",
-  "Tira o dedo!",
+  "QUE FOI?! 😠",
+  "TIRA O DEDO!",
   "Estou ocupado!",
   "QUACK! 😡",
-  "Me deixa!",
-  "Isso é assédio penoso!"
+  "ME DEIXA!",
+  "Isso é assédio penoso!",
+  "Vai cuidar da sua vida!",
+  "GRRRR!"
 ];
 
-duck.addEventListener("click", () => {
+let direction = 1;
+let walking = true;
+let dragging = false;
+let startX = 0;
+let startY = 0;
+let moved = false;
+let lastX = 0;
+
+function angry() {
   message.textContent =
     phrases[Math.floor(Math.random() * phrases.length)];
 
@@ -159,9 +176,76 @@ duck.addEventListener("click", () => {
 
   setTimeout(() => {
     duck.classList.remove("angry");
-  }, 700);
+  }, 750);
+}
+
+function walk() {
+  if (!walking || dragging) return;
+
+  let x = duck.offsetLeft + direction * 3;
+
+  if (x > window.innerWidth - 130) {
+    direction = -1;
+  }
+
+  if (x < 5) {
+    direction = 1;
+  }
+
+  duck.style.left = Math.max(5, Math.min(
+    window.innerWidth - 130, x
+  )) + "px";
+
+  duck.style.setProperty("--dir", direction);
+}
+
+setInterval(walk, 45);
+
+duck.addEventListener("pointerdown", (e) => {
+  dragging = true;
+  moved = false;
+  startX = e.clientX;
+  startY = e.clientY;
+  lastX = e.clientX;
+  duck.setPointerCapture(e.pointerId);
 });
+
+duck.addEventListener("pointermove", (e) => {
+  if (!dragging) return;
+
+  if (Math.abs(e.clientX - startX) > 5 ||
+      Math.abs(e.clientY - startY) > 5) {
+    moved = true;
+  }
+
+  if (moved) {
+    duck.style.left = Math.max(0, Math.min(
+      window.innerWidth - 125,
+      duck.offsetLeft + e.clientX - lastX
+    )) + "px";
+
+    duck.style.top = Math.max(0, Math.min(
+      window.innerHeight - 120,
+      duck.offsetTop + e.clientY - startY
+    )) + "px";
+
+    startY = e.clientY;
+    duck.style.setProperty("--dir",
+      e.clientX >= lastX ? 1 : -1);
+  }
+
+  lastX = e.clientX;
+});
+
+duck.addEventListener("pointerup", () => {
+  if (!moved) angry();
+  dragging = false;
+});
+
+duck.addEventListener("pointercancel", () => {
+  dragging = false;
+});
+
 </script>
 </body>
-      </html>
-      
+</html>
